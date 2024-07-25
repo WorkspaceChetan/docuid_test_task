@@ -6,7 +6,6 @@ import { Procedures } from "@/services/types";
 
 export default async function Home() {
   const res = await HomeServices.getProcedues();
-  console.log("AAAAAAAAAAAAAA", res);
 
   const procedures =
     typeof res !== "string" ? (res as Procedures[]) : ([] as Procedures[]);

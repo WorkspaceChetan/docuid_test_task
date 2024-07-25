@@ -97,9 +97,9 @@ const HomeContainer = ({ procedures }: { procedures: Procedures[] }) => {
     return initialColumns;
   };
 
-  const [columns, setColumns] = useState<Columns>(getProcessedColumns());
+  const [columns, setColumns] = useState<Columns>(() => getProcessedColumns());
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     try {
       const procedures = await HomeServices.getProcedues();
       if (typeof procedures !== "string") {
@@ -108,19 +108,12 @@ const HomeContainer = ({ procedures }: { procedures: Procedures[] }) => {
     } catch (error) {
       console.error("Failed to fetch procedures:", error);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
 
   useEffect(() => {
     fetchData();
-  }, [
-    selectedUser,
-    selectedCategory,
-    searchInput,
-    startDate,
-    endDate,
-    fetchData,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedUser, selectedCategory, searchInput, startDate, endDate]);
 
   const handleChangeColumns = (val: Columns) => {
     setColumns(val);
