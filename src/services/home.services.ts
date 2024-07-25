@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
   createProceduesParam,
-  GetProcedures,
+  Procedures,
   Category,
   UpdateProcedureParams,
   Users,
@@ -10,7 +10,9 @@ import {
 export class HomeServices {
   static getProcedues = async () => {
     try {
-      const res = await axios.get<GetProcedures[]>(`/api/procedure`);
+      const res = await axios.get<Procedures[]>(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/procedure`
+      );
 
       return res.data;
     } catch (err: any) {

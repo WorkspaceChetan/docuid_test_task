@@ -7,7 +7,7 @@ export interface Category {
   [key: string]: any;
 }
 
-export interface GetProcedures {
+export interface Procedures {
   _id: string;
   title: string;
   user: User;

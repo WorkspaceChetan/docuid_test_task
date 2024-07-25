@@ -33,16 +33,8 @@ const Filter = ({
   endDate,
   setEndDate,
 }: FilterProps) => {
-  // const [searchInput, setSearchInput] = useState<string>("");
   const [users, setUsers] = useState<Users[]>([]);
-  // const [selectedUser, setSelectedUser] = useState<string>("");
-
   const [labels, setLabels] = useState<Category[]>([]);
-  // const [selectedLabel, setSelectedLabel] = useState<string>("");
-
-  // const [startDate, setStartDate] = useState<Date | undefined>(undefined);
-  // const [endDate, setEndDate] = useState<Date | undefined>(undefined);
-
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
   const [isDateOpen, setIsDateOpen] = useState(false);

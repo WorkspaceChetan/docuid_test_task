@@ -26,7 +26,7 @@ const validationSchema = z.object({
 
 type FormValues = z.infer<typeof validationSchema>;
 
-const HeadingBox = () => {
+const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
   const [showModal, setShowModal] = useState(false);
   const [userProcedures, setUserProcedures] = useState<Users[]>([]);
   const [selectedUser, setSelectedUser] = useState<string>("");
@@ -63,11 +63,9 @@ const HeadingBox = () => {
   const {
     register,
     handleSubmit,
-    getValues,
     setValue,
-    watch,
     resetField,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(validationSchema),
     defaultValues: {
@@ -129,6 +127,7 @@ const HeadingBox = () => {
         payload as unknown as createProceduesParam
       );
       setShowModal(false);
+      await fetchData();
       resetField("title");
       resetField("category");
       toast.success("Success");
