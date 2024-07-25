@@ -3,7 +3,7 @@ import Procedure from "@/lib/modals/procedure";
 import { NextResponse } from "next/server";
 import { Types } from "mongoose";
 
-export const getNonGMTDate = (dtParam: Date): Date => {
+const getNonGMTDate = (dtParam: Date): Date => {
   const dt = new Date(dtParam);
   const date = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate());
   const userTimezoneOffset = date.getTimezoneOffset() * 60000;
