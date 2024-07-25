@@ -13,7 +13,7 @@ const connect = async () => {
 
   try {
     mongoose.connect(mongooseUri!, {
-      dbName: "todo-trello",
+      dbName: "docuid_test_task",
       bufferCommands: true,
     });
     console.log("Connected");
