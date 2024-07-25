@@ -10,9 +10,7 @@ import {
 export class HomeServices {
   static getProcedues = async () => {
     try {
-      const res = await axios.get<GetProcedures[]>(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/procedure`
-      );
+      const res = await axios.get<GetProcedures[]>(`/api/procedure`);
 
       return res.data;
     } catch (err: any) {
@@ -22,9 +20,7 @@ export class HomeServices {
 
   static getUsers = async () => {
     try {
-      const res = await axios.get<Users[]>(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/user`
-      );
+      const res = await axios.get<Users[]>(`/api/user`);
 
       return res.data;
     } catch (err: any) {
@@ -34,9 +30,7 @@ export class HomeServices {
 
   static getCategories = async () => {
     try {
-      const res = await axios.get<Category[]>(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/category`
-      );
+      const res = await axios.get<Category[]>(`/api/category`);
 
       return res.data;
     } catch (err: any) {
@@ -46,11 +40,9 @@ export class HomeServices {
 
   static createProcedues = async (params: createProceduesParam) => {
     try {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/procedure`,
-        params,
-        { headers: { "Content-Type": "application/json" } }
-      );
+      const res = await axios.post(`/api/procedure`, params, {
+        headers: { "Content-Type": "application/json" },
+      });
 
       return res.data;
     } catch (err: any) {
@@ -63,7 +55,7 @@ export class HomeServices {
   ): Promise<UpdateProcedureParams | string> => {
     try {
       const res = await axios.put<UpdateProcedureParams>(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/procedure`,
+        `/api/procedure`,
         params
       );
 
