@@ -85,7 +85,8 @@ export const POST = async (request: Request) => {
 export const PATCH = async (request: Request) => {
   try {
     const body = await request.json();
-    const { _id, title, category, column, dueDate } = body;
+    const { _id, title, category, column, dueDate, priority, user, createAt } =
+      body;
 
     await connect();
 
@@ -105,19 +106,16 @@ export const PATCH = async (request: Request) => {
     }
 
     const updateData: any = { _id };
-    if (title) updateData.title = title;
-    if (
-      category &&
-      Array.isArray(category) &&
-      category.every((id) => Types.ObjectId.isValid(id))
-    ) {
-      updateData.category = category.map((id) => new Types.ObjectId(id));
-    }
-    if (column) updateData.column = column;
+    updateData.title = title;
+    updateData.category = category;
+    updateData.column = column;
+    updateData.priority = priority;
+    updateData.user = user;
+    updateData.createAt = createAt;
 
     if (dueDate) {
       try {
-        updateData.dueDate = convertDate(dueDate);
+        updateData.dueDate = dueDate;
       } catch (error) {
         return new NextResponse(
           JSON.stringify({ message: "Invalid dueDate format" }),
@@ -138,6 +136,8 @@ export const PATCH = async (request: Request) => {
         { status: 404 }
       );
     }
+
+    console.log(updatedProcedure);
 
     return new NextResponse(
       JSON.stringify({

@@ -221,8 +221,7 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
         </div>
         <button
           className="flex gap-2 h-11 rounded-lg py-2.5 pl-3 pr-4.5 bg-primary text-white font-black text-base"
-          onClick={() => setShowModal(true)}
-        >
+          onClick={() => setShowModal(true)}>
           <Image src="/image/Add Square.svg" alt="add" width={20} height={20} />
           Create a new procedure
         </button>
@@ -253,8 +252,7 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
                   <div
                     className="relative w-full lg:w-[128px] h-[44px] rounded-[8px] border p-[10px_18px_10px_12px] gap-[8px] text-[#F9FAFB] bg-[#F9FAFB] flex items-center cursor-pointer"
                     ref={priorityDropdownRef}
-                    onClick={togglePriorityDropdown}
-                  >
+                    onClick={togglePriorityDropdown}>
                     <div className="w-full lg:w-[70px] h-[24px] text-[14px] leading-[24px] font-[500] text-[#495270] whitespace-nowrap">
                       {selectedPriority}
                     </div>
@@ -265,8 +263,7 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
-                        onClick={handleRemovePriority}
-                      >
+                        onClick={handleRemovePriority}>
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -290,8 +287,7 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
                           <div
                             key={i + 1}
                             className="p-2 text-[14px] text-[#495270] hover:bg-[#D1D5DB] cursor-pointer"
-                            onClick={() => handlePrioritySelect(i + 1)}
-                          >
+                            onClick={() => handlePrioritySelect(i + 1)}>
                             {i + 1}
                           </div>
                         ))}
@@ -312,8 +308,7 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
                     <div
                       className="relative w-full lg:w-[128px] h-[44px] rounded-[8px] border p-[10px_18px_10px_12px] gap-[8px] text-[#F9FAFB] bg-[#F9FAFB] flex items-center cursor-pointer"
                       ref={nameDropdownRef}
-                      onClick={toggleUserDropdown}
-                    >
+                      onClick={toggleUserDropdown}>
                       <div className="w-full lg:w-[70px] h-[24px] text-[14px] leading-[24px] font-[500] text-[#495270] whitespace-nowrap">
                         {selectedUser}
                       </div>
@@ -324,8 +319,7 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
-                          onClick={handleRemoveUser}
-                        >
+                          onClick={handleRemoveUser}>
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -351,8 +345,7 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
                               className="p-2 text-[14px] text-[#495270] hover:bg-[#D1D5DB] cursor-pointer"
                               onClick={() =>
                                 handleUserSelect(procedure.userName)
-                              }
-                            >
+                              }>
                               {procedure.userName}
                             </div>
                           ))}
@@ -370,8 +363,7 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
                     <div
                       className="relative w-full  h-[44px] rounded-[8px] border p-[10px_18px_10px_12px] gap-[8px] text-[#F9FAFB] bg-[#F9FAFB] flex items-center cursor-pointer"
                       ref={categoryDropdownRef}
-                      onClick={toggleCategoryDropdown}
-                    >
+                      onClick={toggleCategoryDropdown}>
                       <div className="w-full lg:w-[192px] h-[24px] text-[14px] leading-[24px] font-[500] text-[#64748B] whitespace-nowrap">
                         {selectedCategory}
                       </div>
@@ -382,8 +374,7 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
-                          onClick={handleRemoveCategory}
-                        >
+                          onClick={handleRemoveCategory}>
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -409,8 +400,7 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
                               className="p-2 text-[14px] text-[#495270] hover:bg-[#D1D5DB] cursor-pointer"
                               onClick={() =>
                                 handleCategorySelect(procedure.categoryName)
-                              }
-                            >
+                              }>
                               {procedure.categoryName}
                             </div>
                           ))}
@@ -462,15 +452,13 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
               <div className="flex justify-end mt-4">
                 <button
                   type="submit"
-                  className="px-4 py-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-600"
-                >
+                  className="px-4 py-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-600">
                   Save
                 </button>
                 <button
                   type="button"
                   className="px-4 py-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300"
-                  onClick={() => setShowModal(false)}
-                >
+                  onClick={() => setShowModal(false)}>
                   Cancel
                 </button>
               </div>

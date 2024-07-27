@@ -74,12 +74,17 @@ const HomeContainer = ({ procedures }: { procedures: Procedures[] }) => {
       filteredProcedures.forEach((procedure) => {
         const taskDate = new Date(procedure.dueDate);
         const task: TaskItem = {
+          _id: procedure._id,
           id: procedure._id,
           label: procedure.category[0]?.categoryName || "",
           description: procedure.title,
           user: procedure.user.userName,
           date: taskDate.toLocaleDateString(),
           priority: procedure.priority,
+          userId: procedure.user._id,
+          categoryId: procedure.category[0]._id,
+          startDate: procedure.createAt,
+          endDate: procedure.dueDate,
         };
 
         const columnItems = newColumns[procedure.column]?.items || [];

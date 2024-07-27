@@ -64,8 +64,7 @@ const TasksManagerBox: React.FC<{
               <div
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                className="flex flex-col gap-5 items-start"
-              >
+                className="flex flex-col gap-5 items-start">
                 <TaskStatusCol
                   title={column.title}
                   color={column.color}
