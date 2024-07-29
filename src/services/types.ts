@@ -20,12 +20,17 @@ export interface Procedures {
 }
 
 export interface TaskItem {
+  _id: string;
   id: string;
   label: string;
   description: string;
   user: string;
   priority: number;
   date: string;
+  userId: string;
+  categoryId: string;
+  startDate: string;
+  endDate: string;
 }
 
 export interface Column {
@@ -62,6 +67,19 @@ export interface UpdateProcedureParams {
   column: string;
 }
 export interface createProceduesParam {
+  title: string;
+  user: string;
+  priority: number;
+  category: string[];
+  column: string;
+  startDate: string;
+  endDate: string;
+  createAt?: string;
+  dueDate?: string;
+}
+
+export interface updateProceduresModelParam {
+  _id: string;
   title: string;
   user: string;
   priority: number;

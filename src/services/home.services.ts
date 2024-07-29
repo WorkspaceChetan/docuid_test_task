@@ -5,6 +5,7 @@ import {
   Category,
   UpdateProcedureParams,
   Users,
+  updateProceduresModelParam,
 } from "./types";
 
 export class HomeServices {
@@ -64,6 +65,18 @@ export class HomeServices {
       return res.data;
     } catch (err: any) {
       return "Something went wrong! Please try again later.";
+    }
+  };
+
+  static updateProceduresModel = async (params: updateProceduresModelParam) => {
+    try {
+      const res = await axios.patch(`/api/procedure`, params, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      return res.data;
+    } catch (err: any) {
+      return err;
     }
   };
 }
