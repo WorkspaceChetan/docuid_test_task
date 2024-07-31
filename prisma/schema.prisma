@@ -1,0 +1,39 @@
+
+
+
+// database baseConnection
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// generate all Tables
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Tables all
+model Procedure {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  priority  Int
+  column    String
+  dueDate   DateTime
+  createdAt DateTime  @default(now()) @map("createAt")
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  categoryId    String
+  category      Category      @relation(fields: [categoryId], references: [id])
+}
+
+model User {
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  userName    String
+  procedures Procedure[]
+}
+
+model Category {
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  procedures Procedure[]
+}
