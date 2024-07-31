@@ -1,3 +1,5 @@
+import { NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
 
 const ProcedureSchema = z.object({
@@ -11,9 +13,6 @@ const ProcedureSchema = z.object({
   userId: z.string().min(1, "User ID is required"),
   categoryId: z.string().min(1, "Category ID is required"),
 });
-
-import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
