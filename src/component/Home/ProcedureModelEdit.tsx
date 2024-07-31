@@ -156,7 +156,8 @@ const ProcedureModelEdit = ({
         } catch (err: any) {
           toast.error(err.message || "An error occurred");
         }
-      }}>
+      }}
+    >
       {({
         values,
         errors,
@@ -194,7 +195,8 @@ const ProcedureModelEdit = ({
                 <div
                   className="relative w-full lg:w-[128px] h-[44px] rounded-[8px] border p-[10px_18px_10px_12px] gap-[8px] text-[#F9FAFB] bg-[#F9FAFB] flex items-center cursor-pointer"
                   ref={priorityDropdownRef}
-                  onClick={() => setIsPriorityDropdownOpen((prev) => !prev)}>
+                  onClick={() => setIsPriorityDropdownOpen((prev) => !prev)}
+                >
                   <div className="w-full lg:w-[70px] h-[24px] text-[14px] leading-[24px] font-[500] text-[#495270] whitespace-nowrap">
                     {selectedPriority}
                   </div>
@@ -204,7 +206,8 @@ const ProcedureModelEdit = ({
                         <div
                           key={i + 1}
                           className="p-2 text-[14px] text-[#495270] hover:bg-[#D1D5DB] cursor-pointer"
-                          onClick={() => handlePrioritySelect(i + 1)}>
+                          onClick={() => handlePrioritySelect(i + 1)}
+                        >
                           {i + 1}
                         </div>
                       ))}
@@ -223,7 +226,8 @@ const ProcedureModelEdit = ({
                     <div
                       className="relative w-full lg:w-[128px] h-[44px] rounded-[8px] border p-[10px_18px_10px_12px] gap-[8px] text-[#F9FAFB] bg-[#F9FAFB] flex items-center cursor-pointer"
                       ref={nameDropdownRef}
-                      onClick={() => setIsUserDropdownOpen((prev) => !prev)}>
+                      onClick={() => setIsUserDropdownOpen((prev) => !prev)}
+                    >
                       <div className="w-full lg:w-[70px] h-[24px] text-[14px] leading-[24px] font-[500] text-[#495270] whitespace-nowrap">
                         {getUserNameById(selectedUserId) || "Select User"}
                       </div>
@@ -237,7 +241,8 @@ const ProcedureModelEdit = ({
                           onClick={() => {
                             setSelectedUserId("");
                             setFieldValue("user", "");
-                          }}>
+                          }}
+                        >
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -264,7 +269,8 @@ const ProcedureModelEdit = ({
                               onClick={() => {
                                 handleUserSelect(user);
                                 setFieldValue("user", user._id);
-                              }}>
+                              }}
+                            >
                               {user.userName}
                             </div>
                           ))}
@@ -280,9 +286,8 @@ const ProcedureModelEdit = ({
                     <div
                       className="relative w-full h-[44px] rounded-[8px] border p-[10px_18px_10px_12px] gap-[8px] text-[#F9FAFB] bg-[#F9FAFB] flex items-center cursor-pointer"
                       ref={categoryDropdownRef}
-                      onClick={() =>
-                        setIsCategoryDropdownOpen((prev) => !prev)
-                      }>
+                      onClick={() => setIsCategoryDropdownOpen((prev) => !prev)}
+                    >
                       <div className="w-full lg:w-[192px] h-[24px] text-[14px] leading-[24px] font-[500] text-[#64748B] whitespace-nowrap">
                         {getCategoryNameById(selectedCategoryId) ||
                           "Select Category"}
@@ -297,7 +302,8 @@ const ProcedureModelEdit = ({
                           onClick={() => {
                             setSelectedCategoryId("");
                             setFieldValue("category", "");
-                          }}>
+                          }}
+                        >
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -324,7 +330,8 @@ const ProcedureModelEdit = ({
                               onClick={() => {
                                 handleCategorySelect(cat);
                                 setFieldValue("category", cat._id);
-                              }}>
+                              }}
+                            >
                               {cat.categoryName}
                             </div>
                           ))}
@@ -382,13 +389,15 @@ const ProcedureModelEdit = ({
               <div className="flex justify-end mt-4">
                 <button
                   type="submit"
-                  className="px-4 py-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-600">
+                  className="px-4 py-2 mr-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+                >
                   Update
                 </button>
                 <button
                   type="button"
                   className="px-4 py-2 text-gray-700 bg-gray-200 rounded hover:bg-gray-300"
-                  onClick={closeModel}>
+                  onClick={closeModel}
+                >
                   Cancel
                 </button>
               </div>

@@ -3,6 +3,7 @@
 import HomeContainer from "@/component/Home/HomeContainer";
 import { HomeServices } from "@/services/home.services";
 import { Procedures } from "@/services/types";
+import { Suspense } from "react";
 
 export default async function Home() {
   const res = await HomeServices.getProcedues();
@@ -12,7 +13,9 @@ export default async function Home() {
 
   return (
     <>
-      <HomeContainer procedures={procedures} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <HomeContainer procedures={procedures} />
+      </Suspense>
     </>
   );
 }
