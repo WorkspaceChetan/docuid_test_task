@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const ProcedureSchema = z.object({
+const ProcedureSchema = z.object({
   title: z.string().min(1, "Title is required"),
   priority: z.number().int().min(1, "Priority must be a positive integer"),
   column: z.string().min(1, "Column is required"),
@@ -17,7 +17,7 @@ import { PrismaClient, Procedure } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function POST(request: Request) {
+export const POST = async (request: Request) => {
   try {
     // await prisma.$connect()
     const requestData = await request.json();
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
   } finally {
     await prisma.$disconnect();
   }
-}
+};
 
 const getNonGMTDate = (dtParam: Date): Date => {
   const dt = new Date(dtParam);

@@ -4,7 +4,7 @@ import { PrismaClient, User } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function GET() {
+export const GET = async () => {
   try {
     // await prisma.$connect();
     const users: User[] = await prisma.user.findMany();
@@ -18,9 +18,9 @@ export async function GET() {
   } finally {
     await prisma.$disconnect();
   }
-}
+};
 
-export async function POST(request: Request) {
+export const POST = async (request: Request) => {
   try {
     // await prisma.$connect();
     const { userName } = await request.json();
@@ -44,4 +44,4 @@ export async function POST(request: Request) {
   } finally {
     await prisma.$disconnect();
   }
-}
+};

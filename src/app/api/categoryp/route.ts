@@ -4,7 +4,7 @@ import { PrismaClient, Category } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function GET() {
+export const GET = async (request: Request) => {
   try {
     const category: Category[] = await prisma.category.findMany();
     return NextResponse.json(category, { status: 200 });
@@ -17,9 +17,9 @@ export async function GET() {
   } finally {
     await prisma.$disconnect();
   }
-}
+};
 
-export async function POST(request: Request) {
+export const POST = async (request: Request) => {
   try {
     const { name } = await request.json();
     if (!name) {
@@ -42,4 +42,4 @@ export async function POST(request: Request) {
   } finally {
     await prisma.$disconnect();
   }
-}
+};
