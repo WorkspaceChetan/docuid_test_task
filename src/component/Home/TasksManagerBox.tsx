@@ -10,6 +10,10 @@ const TasksManagerBox: React.FC<{
   columns: Columns;
   handleChangeColumns: (val: Columns) => void;
 }> = ({ columns, handleChangeColumns }) => {
+  const isDataAvailable = Object.values(columns).some(
+    (column) => column.items.length > 0
+  );
+
   const onDragEnd = async (result: any) => {
     const { source, destination } = result;
 
@@ -58,23 +62,30 @@ const TasksManagerBox: React.FC<{
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="flex gap-7.5 overflow-auto pb-5">
-        {Object.entries(columns)?.map(([id, column]) => (
-          <Droppable key={id} droppableId={id}>
-            {(provided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                className="flex flex-col gap-5 items-start">
-                <TaskStatusCol
-                  title={column.title}
-                  color={column.color}
-                  items={column.items}
-                />
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        ))}
+        {isDataAvailable ? (
+          Object.entries(columns)?.map(([id, column]) => (
+            <Droppable key={id} droppableId={id}>
+              {(provided) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  className="flex flex-col gap-5 items-start"
+                >
+                  <TaskStatusCol
+                    title={column.title}
+                    color={column.color}
+                    items={column.items}
+                  />
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          ))
+        ) : (
+          <div className="flex items-center justify-center w-full h-full text-gray-500">
+            No tasks available
+          </div>
+        )}
       </div>
     </DragDropContext>
   );

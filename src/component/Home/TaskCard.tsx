@@ -1,12 +1,14 @@
 "use client";
 import { TaskItem } from "@/services/types";
-import { is } from "date-fns/locale";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProcedureModelEdit from "./ProcedureModelEdit";
+import { format } from "date-fns";
+import { enUS } from "date-fns/locale";
 
 const TaskCard = (item: TaskItem) => {
   const [open, setIsOpen] = useState(false);
+  const [formattedDate, setFormattedDate] = useState("");
 
   const modelOpen = () => {
     setIsOpen(true);
@@ -15,16 +17,21 @@ const TaskCard = (item: TaskItem) => {
   const closeModel = () => {
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    const date = new Date(item.date);
+    setFormattedDate(format(date, "dd/MM/yyyy", { locale: enUS }));
+  }, [item.date]);
+
   return (
     <>
       <div
         className="w-full max-w-[300px] flex flex-wrap rounded-md w-76 bg-white p-[20px]"
         onClick={(e) => {
-          console.log("call");
-
           e.preventDefault();
           modelOpen();
-        }}>
+        }}
+      >
         <div className="w-full max-w-[260px] flex flex-col gap-[10px]">
           <div className="w-full flex gap-[10px]">
             <div className="rounded-full p-[2px_10px] bg-[rgba(99,91,255,0.05)] flex justify-center">
@@ -61,25 +68,25 @@ const TaskCard = (item: TaskItem) => {
           </div>
           <hr className="w-full" />
           <div className="flex justify-between items-center w-full h-[16px]">
-            <div className="flex gap-1.5 items-center rounded-full px-2 py-0.5 bg-light-grey">
+            <div className="flex gap-[6px] items-center rounded-full px-[0.4rem] py-[0.25rem] bg-light-grey">
               <Image
-                src="/image/history.svg"
+                src="/image/History.svg"
                 alt="history"
                 width={12}
                 height={12}
               />
-              <span className="text-[8px] leading-[10px] font-semibold text-[#1C274C] font-inter">
-                Due date: {item.date}
+              <span className="text-[12px] leading-[10px] font-semibold text-[#1C274C] font-inter">
+                Due date: {formattedDate}
               </span>
             </div>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-[5px]">
               <Image
                 src="/image/Chat Round Line.svg"
                 alt="Chat Round Line"
                 width={14}
                 height={14}
               />
-              <span className="text-2.5 font-semibold text-secondary-text font-inter">
+              <span className="text-[12px] font-semibold text-secondary-text font-inter">
                 1
               </span>
             </div>
