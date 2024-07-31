@@ -4,8 +4,10 @@ import { PrismaClient, Category } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export const GET = async (request: Request) => {
+export const GET = async () => {
   try {
+    await prisma.$connect();
+
     const category: Category[] = await prisma.category.findMany();
     return NextResponse.json(category, { status: 200 });
   } catch (error) {
@@ -21,6 +23,8 @@ export const GET = async (request: Request) => {
 
 export const POST = async (request: Request) => {
   try {
+    await prisma.$connect();
+
     const { name } = await request.json();
     if (!name) {
       return NextResponse.json(

@@ -19,7 +19,7 @@ const prisma = new PrismaClient();
 
 export const POST = async (request: Request) => {
   try {
-    // await prisma.$connect()
+    await prisma.$connect();
     const requestData = await request.json();
 
     const bodyData = ProcedureSchema.parse(requestData);
@@ -65,7 +65,7 @@ const convertDate = (dateString: string): Date => {
 
 export const GET = async (request: Request) => {
   try {
-    // await prisma.$connect()
+    await prisma.$connect();
     const url = new URL(request.url);
     const startDateString = url.searchParams.get("startDate");
     const endDateString = url.searchParams.get("endDate");
@@ -117,7 +117,7 @@ export const GET = async (request: Request) => {
 
 export const PUT = async (request: Request) => {
   try {
-    // await prisma.$connect()
+    await prisma.$connect();
     const body = await request.json();
     const { id, column } = body;
     if (!id) {
@@ -156,7 +156,7 @@ export const PUT = async (request: Request) => {
 
 export const PATCH = async (request: Request) => {
   try {
-    // await prisma.$connect()
+    await prisma.$connect();
     const body = await request.json();
     const { id, title, category, column, dueDate, priority } = body;
 

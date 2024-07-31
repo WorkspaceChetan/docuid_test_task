@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export const GET = async () => {
   try {
-    // await prisma.$connect();
+    await prisma.$connect();
     const users: User[] = await prisma.user.findMany();
     return NextResponse.json(users, { status: 200 });
   } catch (error) {
@@ -21,7 +21,7 @@ export const GET = async () => {
 
 export const POST = async (request: Request) => {
   try {
-    // await prisma.$connect();
+    await prisma.$connect();
     const { userName } = await request.json();
     if (!userName) {
       return NextResponse.json(
