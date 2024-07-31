@@ -4,15 +4,23 @@ export interface User {
 }
 
 export interface Category {
-  [key: string]: any;
+  _id: string;
+  name: string;
+}
+
+export interface AddCategory {
+  id: string;
+  name: string;
 }
 
 export interface Procedures {
-  _id: string;
+  id: string;
   title: string;
   user: User;
+  userId: string;
+  categoryId: string;
   priority: number;
-  category: Category[];
+  category: Category;
   column: string;
   dueDate: string;
   createAt: string;
@@ -20,7 +28,6 @@ export interface Procedures {
 }
 
 export interface TaskItem {
-  _id: string;
   id: string;
   label: string;
   description: string;
@@ -56,6 +63,12 @@ export interface Users {
   __v: number;
 }
 
+export interface AddUser {
+  id: string;
+  userName: string;
+  __v: number;
+}
+
 export interface Category {
   _id: string;
   categoryName: string;
@@ -63,7 +76,7 @@ export interface Category {
 }
 
 export interface UpdateProcedureParams {
-  _id: string;
+  id: string;
   column: string;
 }
 export interface createProceduesParam {

@@ -137,8 +137,6 @@ export const PATCH = async (request: Request) => {
       );
     }
 
-    console.log(updatedProcedure);
-
     return new NextResponse(
       JSON.stringify({
         message: "Procedure is updated",

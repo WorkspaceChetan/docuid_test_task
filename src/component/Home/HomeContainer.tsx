@@ -68,8 +68,7 @@ const HomeContainer = ({ procedures }: { procedures: Procedures[] }) => {
         const matchesName =
           !selectedUser || procedure.user.userName === selectedUser;
         const matchesCategory =
-          !selectedCategory ||
-          procedure.category[0]?.categoryName === selectedCategory;
+          !selectedCategory || procedure.category.name === selectedCategory;
         const matchesSearch =
           !searchInput ||
           procedure.title.toLowerCase().includes(searchInput.toLowerCase());
@@ -87,18 +86,18 @@ const HomeContainer = ({ procedures }: { procedures: Procedures[] }) => {
           matchesName && matchesCategory && matchesSearch && matchesDateRange
         );
       });
+
       filteredProcedures.forEach((procedure) => {
         const taskDate = new Date(procedure.dueDate);
         const task: TaskItem = {
-          _id: procedure._id,
-          id: procedure._id,
-          label: procedure.category[0]?.categoryName || "",
+          id: procedure.id,
+          label: procedure.category.name || "",
           description: procedure.title,
           user: procedure.user.userName,
           date: taskDate.toLocaleDateString(),
           priority: procedure.priority,
-          userId: procedure.user._id,
-          categoryId: procedure.category[0]._id,
+          userId: procedure.userId,
+          categoryId: procedure.categoryId,
           startDate: procedure.createAt,
           endDate: procedure.dueDate,
         };

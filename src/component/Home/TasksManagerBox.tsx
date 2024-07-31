@@ -1,9 +1,8 @@
 "use client";
-
-import React, { useState, useEffect } from "react";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import React from "react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import TaskStatusCol from "./TaskStatusCol";
-import { Columns, Procedures, TaskItem } from "@/services/types";
+import { Columns, TaskItem } from "@/services/types";
 import { HomeServices } from "@/services/home.services";
 
 const TasksManagerBox: React.FC<{
@@ -50,7 +49,7 @@ const TasksManagerBox: React.FC<{
 
       try {
         await HomeServices.updateProcedures({
-          _id: removed.id,
+          id: removed.id,
           column: destination.droppableId,
         });
       } catch (error) {

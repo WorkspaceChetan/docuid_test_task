@@ -6,13 +6,15 @@ import {
   UpdateProcedureParams,
   Users,
   updateProceduresModelParam,
+  AddUser,
+  AddCategory,
 } from "./types";
 
 export class HomeServices {
   static getProcedues = async () => {
     try {
       const res = await axios.get<Procedures[]>(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/procedure`
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/procedurep`
       );
 
       return res.data;
@@ -23,7 +25,7 @@ export class HomeServices {
 
   static getUsers = async () => {
     try {
-      const res = await axios.get<Users[]>(`/api/user`);
+      const res = await axios.get<AddUser[]>(`/api/userp`);
 
       return res.data;
     } catch (err: any) {
@@ -33,7 +35,7 @@ export class HomeServices {
 
   static getCategories = async () => {
     try {
-      const res = await axios.get<Category[]>(`/api/category`);
+      const res = await axios.get<AddCategory[]>(`/api/categoryp`);
 
       return res.data;
     } catch (err: any) {
@@ -43,7 +45,7 @@ export class HomeServices {
 
   static createProcedues = async (params: createProceduesParam) => {
     try {
-      const res = await axios.post(`/api/procedure`, params, {
+      const res = await axios.post(`/api/procedurep`, params, {
         headers: { "Content-Type": "application/json" },
       });
 
@@ -58,7 +60,7 @@ export class HomeServices {
   ): Promise<UpdateProcedureParams | string> => {
     try {
       const res = await axios.put<UpdateProcedureParams>(
-        `/api/procedure`,
+        `/api/procedurep`,
         params
       );
 

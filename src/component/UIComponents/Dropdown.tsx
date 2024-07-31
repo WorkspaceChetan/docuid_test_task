@@ -2,7 +2,7 @@ import React, { useRef, useState, MouseEvent, useEffect } from "react";
 import Image from "next/image";
 import { DropdownProps } from "./DropdownProps";
 
-const Dropdown = <T extends { _id: string }>({
+const Dropdown = <T extends { id: string }>({
   items,
   selectedItem,
   setSelectedItem,
@@ -90,7 +90,7 @@ const Dropdown = <T extends { _id: string }>({
         >
           {items.map((item) => (
             <div
-              key={item._id}
+              key={item.id}
               className="p-2 text-[14px] text-[#495270] hover:bg-[#D1D5DB] cursor-pointer"
               onClick={() => handleSelect(itemRenderer(item))}
             >

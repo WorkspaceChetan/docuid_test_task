@@ -6,7 +6,12 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { HomeServices } from "@/services/home.services";
-import { createProceduesParam, Category, Users } from "@/services/types";
+import {
+  createProceduesParam,
+  Category,
+  AddUser,
+  AddCategory,
+} from "@/services/types";
 import { toast } from "react-toastify";
 import Dropdown from "../UIComponents/DropDownAdd";
 import Datepicker, { DateValueType } from "react-tailwindcss-datepicker";
@@ -15,8 +20,8 @@ import { parseISO } from "date-fns/parseISO";
 const validationSchema = z.object({
   title: z.string().min(1, "Title is required"),
   priority: z.number().min(1, "Priority is required"),
-  user: z.string().min(1, "Username is required"),
-  category: z.string().min(1, "Category is required"),
+  userId: z.string().min(1, "Username is required"),
+  categoryId: z.string().min(1, "Category is required"),
   startDate: z
     .date({
       required_error: "Date is required",
@@ -31,10 +36,10 @@ type FormValues = z.infer<typeof validationSchema>;
 
 const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
   const [showModal, setShowModal] = useState(false);
-  const [userProcedures, setUserProcedures] = useState<Users[]>([]);
+  const [userProcedures, setUserProcedures] = useState<AddUser[]>([]);
   const [selectedUser, setSelectedUser] = useState<string>("");
 
-  const [category, setCategory] = useState<Category[]>([]);
+  const [category, setCategory] = useState<AddCategory[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
   const [selectedPriority, setSelectedPriority] = useState<number>(1);
@@ -58,8 +63,8 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
     defaultValues: {
       title: "",
       priority: 1,
-      user: selectedUser,
-      category: selectedCategory,
+      userId: selectedUser,
+      categoryId: selectedCategory,
       column: "todo",
       startDate: dateRange.startDate ?? null,
       endDate: dateRange.endDate ?? null,
@@ -110,7 +115,7 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
       setShowModal(false);
       await fetchData();
       resetField("title");
-      resetField("category");
+      resetField("categoryId");
       toast.success("Success");
     } catch (err) {
       const errorMessage =
@@ -122,22 +127,24 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
   useEffect(() => {
     const fetchUserProcedures = async () => {
       const data = await HomeServices.getUsers();
+
       if (typeof data !== "string") {
         setUserProcedures(data);
         if (data.length > 0) {
           setSelectedUser(data[0].userName);
-          setValue("user", data[0]._id);
+          setValue("userId", data[0].id);
         }
       }
     };
 
     const fetchCategories = async () => {
       const data = await HomeServices.getCategories();
+
       if (typeof data !== "string") {
         setCategory(data);
         if (data.length > 0) {
-          setSelectedCategory(data[0].categoryName);
-          setValue("category", data[0]._id);
+          setSelectedCategory(data[0].name);
+          setValue("categoryId", data[0].id);
         }
       }
     };
@@ -211,42 +218,42 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
               <div className="mb-2">
                 <div className="flex justify-between gap-4">
                   <Dropdown
-                    items={userProcedures.map(({ _id, userName }) => ({
-                      id: _id,
+                    items={userProcedures.map(({ id, userName }) => ({
+                      id: id,
                       name: userName,
                     }))}
                     selectedItem={selectedUser}
                     onSelect={(id, name) => {
                       setSelectedUser(name);
-                      setValue("user", id);
+                      setValue("userId", id);
                     }}
                     onRemove={() => {
                       setSelectedUser("");
-                      setValue("user", "");
+                      setValue("userId", "");
                     }}
                     placeholder="Select User"
                     iconSrc="/image/User.svg"
                     dropdownLabel="User"
-                    error={errors.user?.message}
+                    error={errors.userId?.message}
                   />
                   <Dropdown
-                    items={category.map(({ _id, categoryName }) => ({
-                      id: _id,
-                      name: categoryName,
+                    items={category.map(({ id, name }) => ({
+                      id: id,
+                      name: name,
                     }))}
                     selectedItem={selectedCategory}
                     onSelect={(id, name) => {
                       setSelectedCategory(name);
-                      setValue("category", id);
+                      setValue("categoryId", id);
                     }}
                     onRemove={() => {
                       setSelectedCategory("");
-                      setValue("category", "");
+                      setValue("categoryId", "");
                     }}
                     placeholder="Select Category"
                     iconSrc="/image/Widget.svg"
                     dropdownLabel="Category"
-                    error={errors.category?.message}
+                    error={errors.categoryId?.message}
                   />
                 </div>
               </div>

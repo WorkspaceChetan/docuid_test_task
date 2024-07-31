@@ -1,5 +1,5 @@
 "use client";
-import { Category, Users } from "@/services/types";
+import { AddCategory, AddUser, Category, Users } from "@/services/types";
 import { format, parseISO } from "date-fns";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -24,8 +24,8 @@ const Filter = ({
 }: FilterProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [users, setUsers] = useState<Users[]>([]);
-  const [labels, setLabels] = useState<Category[]>([]);
+  const [users, setUsers] = useState<AddUser[]>([]);
+  const [labels, setLabels] = useState<AddCategory[]>([]);
   const [dateRange, setDateRange] = useState<{
     startDate: Date | null;
     endDate: Date | null;
@@ -139,7 +139,7 @@ const Filter = ({
               items={labels}
               selectedItem={selectedLabel}
               setSelectedItem={setSelectedLabel}
-              itemRenderer={(item) => item.categoryName}
+              itemRenderer={(item) => item.name}
               placeholder="Select Category"
               iconSrc="/image/Widget.svg"
               widthClass="lg:w-[250px]"
