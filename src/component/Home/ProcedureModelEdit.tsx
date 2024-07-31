@@ -6,6 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { z } from "zod";
 import { HomeServices } from "@/services/home.services";
 import {
+  AddCategory,
+  AddUser,
   Category,
   TaskItem,
   Users,
@@ -34,8 +36,8 @@ const ProcedureModelEdit = ({
   closeModel: () => void;
   item: TaskItem;
 }) => {
-  const [userProcedures, setUserProcedures] = useState<Users[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [userProcedures, setUserProcedures] = useState<AddUser[]>([]);
+  const [categories, setCategories] = useState<AddCategory[]>([]);
   const [selectedUserId, setSelectedUserId] = useState<string>(item.userId);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>(
     item.categoryId
@@ -99,13 +101,13 @@ const ProcedureModelEdit = ({
     };
   }, []);
 
-  const handleUserSelect = (user: Users) => {
-    setSelectedUserId(user._id);
+  const handleUserSelect = (user: AddUser) => {
+    setSelectedUserId(user.id);
     setIsUserDropdownOpen(false);
   };
 
-  const handleCategorySelect = (cat: Category) => {
-    setSelectedCategoryId(cat._id);
+  const handleCategorySelect = (cat: AddCategory) => {
+    setSelectedCategoryId(cat.id);
     setIsCategoryDropdownOpen(false);
   };
 
@@ -115,13 +117,13 @@ const ProcedureModelEdit = ({
   };
 
   const getUserNameById = (id: string) => {
-    const user = userProcedures.find((user) => user._id === id);
+    const user = userProcedures.find((user) => user.id === id);
     return user ? user.userName : "Select User";
   };
 
   const getCategoryNameById = (id: string) => {
-    const category = categories.find((cat) => cat._id === id);
-    return category ? category.categoryName : "Select Category";
+    const category = categories.find((cat) => cat.id === id);
+    return category ? category.name : "Select Category";
   };
 
   return (
@@ -264,11 +266,11 @@ const ProcedureModelEdit = ({
                         <div className="absolute top-[100%] left-0 mt-2 w-full bg-[#E5E7EB] border rounded-[8px] shadow-lg z-10">
                           {userProcedures.map((user) => (
                             <div
-                              key={user._id}
+                              key={user.id}
                               className="p-2 text-[14px] text-[#495270] hover:bg-[#D1D5DB] cursor-pointer"
                               onClick={() => {
                                 handleUserSelect(user);
-                                setFieldValue("user", user._id);
+                                setFieldValue("user", user.id);
                               }}
                             >
                               {user.userName}
@@ -325,14 +327,14 @@ const ProcedureModelEdit = ({
                         <div className="absolute top-[100%] left-0 mt-2 w-full bg-[#E5E7EB] border rounded-[8px] shadow-lg z-10">
                           {categories.map((cat) => (
                             <div
-                              key={cat._id}
+                              key={cat.id}
                               className="p-2 text-[14px] text-[#495270] hover:bg-[#D1D5DB] cursor-pointer"
                               onClick={() => {
                                 handleCategorySelect(cat);
-                                setFieldValue("category", cat._id);
+                                setFieldValue("category", cat.id);
                               }}
                             >
-                              {cat.categoryName}
+                              {cat.name}
                             </div>
                           ))}
                         </div>
