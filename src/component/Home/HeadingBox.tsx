@@ -250,8 +250,11 @@ const HeadingBox = ({ fetchData }: { fetchData: () => Promise<void> }) => {
                   />
                 </div>
               </div>
-              <div className="w-full max-w-[931px] h-auto lg:h-[44px] gap-[10px] mt-10 ">
-                <Datepicker value={dateRange} onChange={handleDateChange} />
+              <div className="w-full max-w-[931px] h-auto gap-[10px] mb-2">
+                <label className="text-gray-700 mb-1">Date</label>
+                <div className="border border-gray-300 rounded-md">
+                  <Datepicker value={dateRange} onChange={handleDateChange} />
+                </div>
               </div>
               <div className="flex justify-end mt-4">
                 <button
