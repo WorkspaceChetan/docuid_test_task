@@ -13,7 +13,7 @@ const ProcedureSchema = z.object({
 });
 
 import { NextResponse } from "next/server";
-import { PrismaClient, Procedure } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -24,7 +24,7 @@ export const POST = async (request: Request) => {
 
     const bodyData = ProcedureSchema.parse(requestData);
 
-    const newProcedure: Procedure = await prisma.procedure.create({
+    const newProcedure = await prisma.procedure.create({
       data: {
         title: bodyData.title,
         priority: bodyData.priority,

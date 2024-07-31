@@ -1,6 +1,5 @@
-// src/app/api/user-prisma/route.ts
 import { NextResponse } from "next/server";
-import { PrismaClient, Category } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -8,7 +7,7 @@ export const GET = async () => {
   try {
     await prisma.$connect();
 
-    const category: Category[] = await prisma.category.findMany();
+    const category = await prisma.category.findMany();
     return NextResponse.json(category, { status: 200 });
   } catch (error) {
     console.error("Error retrieving category:", error);
