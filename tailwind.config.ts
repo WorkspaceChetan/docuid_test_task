@@ -41,7 +41,11 @@ const config: Config = {
   },
   plugins: [],
   purge: {
-    content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+    content: [
+      "./src/**/*.{js,jsx,ts,tsx}",
+      "./public/index.html",
+      "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
+    ],
     // Map over the labels and add them to the safelist
     safelist: [
       ...["#635bff", "#0CBE5E", "#FFDD0F", "#64748B"].map(

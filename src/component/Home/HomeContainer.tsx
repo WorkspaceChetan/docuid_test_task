@@ -1,11 +1,12 @@
 "use client";
 import { Procedures, Columns, TaskItem } from "@/services/types";
-import React, { useCallback, useEffect, useState } from "react";
-import "react-datepicker/dist/react-datepicker.css";
+import React, { useEffect, useState } from "react";
 import TasksManagerBox from "./TasksManagerBox";
 import { HomeServices } from "@/services/home.services";
 import Filter from "./Filter";
 import HeadingBox from "./HeadingBox";
+import { useSearchParams } from "next/navigation";
+import { parseISO } from "date-fns";
 
 const initialColumns: Columns = {
   todo: {
@@ -35,13 +36,28 @@ const initialColumns: Columns = {
 };
 
 const HomeContainer = ({ procedures }: { procedures: Procedures[] }) => {
-  const [searchInput, setSearchInput] = useState<string>("");
-  const [selectedUser, setSelectedUser] = useState<string>("");
+  const searchParams = useSearchParams();
+  const startDateParam = searchParams.get("startDate");
+  const endDateParam = searchParams.get("endDate");
 
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [searchInput, setSearchInput] = useState<string>(
+    searchParams.get("search") || ""
+  );
 
-  const [startDate, setStartDate] = useState<Date | undefined>(undefined);
-  const [endDate, setEndDate] = useState<Date | undefined>(undefined);
+  const [selectedUser, setSelectedUser] = useState<string>(
+    searchParams.get("user") || ""
+  );
+
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    searchParams.get("label") || ""
+  );
+
+  const [startDate, setStartDate] = useState<Date | undefined>(
+    startDateParam ? parseISO(startDateParam) : undefined
+  );
+  const [endDate, setEndDate] = useState<Date | undefined>(
+    endDateParam ? parseISO(endDateParam) : undefined
+  );
 
   const getProcessedColumns = (data?: Procedures[]) => {
     const collection = data?.length ? data : procedures;
